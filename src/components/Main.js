@@ -8,7 +8,8 @@ import dewpointPng from "../assets/dewpoint.png"
 import { toImperial, toStandard } from "../modules/dataObject"
 
 export default function Main(obj, standard=true) {
-
+  
+  localStorage.setItem('lastVisited', JSON.stringify(obj))
   let data;
   if(standard) {
     data = toStandard(obj)

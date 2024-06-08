@@ -1,5 +1,6 @@
 import { standard } from "../global"
 import getWeather from "../modules/weatherService"
+import ErrorPage from "./ErrorPage"
 import Invalid from "./InvalidRes"
 import Main from "./Main"
 
@@ -17,7 +18,6 @@ export default function Header() {
       try {
         // eslint-disable-next-line no-unused-vars
         const cityName = res.location.name
-        localStorage.setItem('lastVisited', JSON.stringify(res))
         document.body.appendChild(Main(res, standard.isStandard()))
       }
       catch{
@@ -32,13 +32,13 @@ export default function Header() {
   btn.classList.add('font-bold', 'px-4', 'py-2', 'text-white', 'rounded-lg', 'hover:bg-white/10', 'bg-white/20', 'text-3xl')
   btn.addEventListener('click', ()=>{
     standard.toggleStandard();
+    document.body.removeChild(document.querySelector('main'))
     try{
       const obj = JSON.parse(localStorage.getItem('lastVisited'))
-      document.body.removeChild(document.querySelector('main'))
       document.body.appendChild( Main(obj, standard.isStandard()) )
     }
     catch {
-      true
+      document.body.appendChild(ErrorPage())
     }
   })
 
