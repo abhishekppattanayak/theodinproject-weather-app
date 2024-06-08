@@ -1,6 +1,7 @@
 import getWeather from "./modules/weatherService";
 import Main from "./components/Main";
-import Header from "./components/header";
+import Header from "./components/Header";
+import { standard } from "./global";
 
 export default async function App() {
 
@@ -10,5 +11,5 @@ export default async function App() {
   const obj = await getWeather('london')
 
   body.appendChild(Header())
-  body.appendChild(Main(obj, true))
+  body.appendChild(Main(obj, standard.isStandard()))
 }

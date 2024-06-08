@@ -1,21 +1,23 @@
+const webpack = require('webpack')
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const path = require("path");
 const Dotenv = require('dotenv-webpack')
 
 module.exports = {
+  mode: "development",
   entry: {
     index: "./src/index.js",
   },
-  mode: "development",
   output: {
     filename: "[name].bundle.js",
     path: path.resolve(__dirname, "dist"),
     clean: true,
   },
   watchOptions: {
-    aggregateTimeout: 100,
-    poll: 100,
+    aggregateTimeout: 400,
+    poll: 1000,
+    ignored: /node_modules/
   },
   module: {
     rules: [
@@ -51,6 +53,6 @@ module.exports = {
     }),
     new Dotenv({
       path: './.env'
-    })
+    }),
   ],
 };
