@@ -14,13 +14,13 @@ export default function Header() {
   search.addEventListener ('keypress'  , async e => {
     if( e.key === 'Enter' && search.value !== '' ) {
       const res = await getWeather(search.value)
-      document.body.removeChild(document.querySelector('main'))
       try {
         // eslint-disable-next-line no-unused-vars
         const cityName = res.location.name
+        document.body.removeChild(document.querySelector('main'))
         document.body.appendChild(Main(res, standard.isStandard()))
       }
-      catch{
+      catch {
         document.body.appendChild(Invalid(res))
       }
     }
